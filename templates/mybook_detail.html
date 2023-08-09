@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFCloudShelf-detail</title>
+    <style>
+        .pdf-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .pdf-details {
+            margin-left: 20px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .news-item,
+        .feature-item {
+            margin-bottom: 1rem;
+        }
+
+        .news-item h3,
+        .feature-item h3 {
+            margin: 0;
+        }
+
+        .news-item p,
+        .feature-item p {
+            color: #555;
+        }
+
+        .account-info {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-info h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .account-info p {
+            margin: 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PDFCloudShelf</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'account:index' %}">Home</a></li>
+                <li><a href="{% url 'file_upload:upload_file' %}">Upload</a></li>
+                <li><a href="{% url 'file_upload:mybook_list' %}">List</a></li>
+                <li><a href="{% url 'account:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>{{ upload_file.file_name }}</h2>
+            <div class="pdf-container">
+                <embed src="https://demo.storj-ipfs.com/ipfs/{{ upload_file.file_hash }}" width="1000px" height="800px"
+                    type="application/pdf">
+                <div class="pdf-details">
+                    <p><strong>File Size:</strong> {{ upload_file.file_size }} byte</p>
+                    <p><strong>Poster:</strong> {{ upload_file.user }} </p>
+                    <p><strong>Posted Date:</strong> {{ upload_file.file_upload_date }}</p>
+                </div>
+            </div>
+            <button class="delete-button">Delete File</button>
+        </section>
+        <script>
+            document.querySelector('.delete-button').addEventListener('click', function () {
+                var confirmation = confirm('Are you sure you want to delete {{ file_name }}?');
+                if (confirmation) {
+                    window.location.href = "{% url 'file_upload:mybook_delete' upload_file.pk%}";
+                    alert('File deleted');
+                }
+            });
+        </script>
+</body>
+
+</html>

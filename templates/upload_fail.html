@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFCloudShelf-file upload failed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PDFCloudShelf</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'account:index' %}">Home</a></li>
+                <li><a href="{% url 'file_upload:upload_file' %}">Upload</a></li>
+                <li><a href="{% url 'file_upload:mybook_list' %}">List</a></li>
+                <li><a href="{% url 'account:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Something went wrong</h2>
+        </section>
+    </main>
+</body>
+
+
+</html>

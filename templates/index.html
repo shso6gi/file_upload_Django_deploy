@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFCloudShelf-Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .news-item,
+        .feature-item {
+            margin-bottom: 1rem;
+        }
+
+        .news-item h3,
+        .feature-item h3 {
+            margin: 0;
+        }
+
+        .news-item p,
+        .feature-item p {
+            color: #555;
+        }
+
+        .account-info {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-info h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .account-info p {
+            margin: 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PDFCloudShelf</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'account:index' %}">Home</a></li>
+                <li><a href="{% url 'file_upload:upload_file' %}">Upload</a></li>
+                <li><a href="{% url 'file_upload:mybook_list' %}">List</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'account:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Account</h2>
+            {% if user.is_authenticated %}
+            <div class="account-info">
+                <p><span class="label">Username:</span> {{ user.username }}</p>
+                <p><span class="label">Email:</span> {{ user.email }}</p>
+                <p><span class="label">Joined Date:</span> {{ user.date_joined }}</p>
+            </div>
+            {% else %}
+            <div class="news-item">
+                <a href="{% url 'account:register' %}">sigh up</a>
+            </div>
+            <div class="news-item">
+                <a href="{% url 'account:login' %}">login</a>
+            </div>
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+
+</html>
